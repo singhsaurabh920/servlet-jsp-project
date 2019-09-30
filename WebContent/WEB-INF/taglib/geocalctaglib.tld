@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<description>Geo Calculator Library</description>
+	<tlib-version>2.1</tlib-version>
+	<short-name>geocalc</short-name>
+	<uri>http://org/gps/jsp/tlds/geocalctags</uri>
+	<tag>
+		<name>geocalc</name>
+		<tag-class>org.gps.web.geo.taglib.GeoDistanceCalculatorTagLib</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>latitude1</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>longitude1</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>latitude2</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>longitude2</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>unit</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>
