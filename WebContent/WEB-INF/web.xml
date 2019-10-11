@@ -33,7 +33,7 @@
   <servlet>
     <servlet-name>HomeServlet</servlet-name>
     <servlet-class>org.worldbuild.project.servlet.HomeServlet</servlet-class>
-     <init-param>
+    <init-param>
       <param-name>title</param-name>
       <param-value>Home</param-value>
     </init-param>

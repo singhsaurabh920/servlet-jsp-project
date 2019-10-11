@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.worldbuild.project.beans.GsonBean;
+import org.worldbuild.project.beans.ApplicationBeanContext;
 
 import com.google.gson.Gson;
 
@@ -32,7 +32,7 @@ public class ProfileServlet extends HttpServlet {
      */
     public ProfileServlet() {
         super();
-        gson=GsonBean.getGson();
+        gson=ApplicationBeanContext.getGson();
     }
     
     @Override

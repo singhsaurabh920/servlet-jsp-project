@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.worldbuild.project.beans.GsonBean;
+import org.worldbuild.project.beans.ApplicationBeanContext;
 import org.worldbuild.project.modal.Response;
 
 import com.google.gson.Gson;
@@ -43,7 +43,7 @@ public class AjaxFilter implements Filter {
 	 */
 	public AjaxFilter() {
 		super();
-		gson = GsonBean.getGson();
+		gson = ApplicationBeanContext.getGson();
 	}
 
 	/**

@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.worldbuild.project.beans.GsonBean;
+import org.worldbuild.project.beans.ApplicationBeanContext;
 import org.worldbuild.project.entity.domain.User;
+import org.worldbuild.project.modal.Response;
+import org.worldbuild.project.service.EmailService;
 import org.worldbuild.project.utils.UserUtils;
 
 import com.google.gson.Gson;
@@ -24,17 +26,18 @@ public class AjaxProfileServlet extends HttpServlet {
 	private static final Logger LOGGER = Logger.getLogger(AjaxProfileServlet.class);
 	private static final long serialVersionUID = 1L;
 	private Gson gson;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AjaxProfileServlet() {
-        super();
-    	gson=GsonBean.getGson();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public AjaxProfileServlet() {
+		super();
+		gson = ApplicationBeanContext.getGson();	
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -42,7 +45,8 @@ public class AjaxProfileServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user=UserUtils.getUser(request);

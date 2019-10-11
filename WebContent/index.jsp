@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/taglib/taglibs.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/logo2.png" type="image/x-icon">
   <meta name="description" content="">
-  <title>Home</title>
+  <title>Official Website of Saurabh Singh</title>
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
   <link rel="stylesheet" href="assets/tether/tether.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -26,7 +27,11 @@
 <jsp:include page="upcoming.jsp"></jsp:include> 
 <jsp:include page="latest.jsp"></jsp:include> 
 <jsp:include page="review.jsp"></jsp:include> 
-<jsp:include page="connect.jsp"></jsp:include>
+<c:choose>   
+	<c:when test="${user!=null}">
+		<jsp:include page="connect.jsp"></jsp:include>
+	</c:when>		
+</c:choose>
 <jsp:include page="footer.jsp"></jsp:include> 
 
   <script src="assets/web/assets/jquery/jquery.min.js"></script>
