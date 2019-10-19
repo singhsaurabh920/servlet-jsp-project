@@ -46,7 +46,6 @@ public class NotificationScheduler {
 			try {
 				String name = CUSTMORS[random.nextInt(CUSTMORS.length)];
 				String msg = name + " sent a message";
-				LOGGER.info(msg);
 				blockingQueue.put(new NotificationSseModal(name,new Date(),msg));
 			} catch (InterruptedException e) {
 				e.printStackTrace();

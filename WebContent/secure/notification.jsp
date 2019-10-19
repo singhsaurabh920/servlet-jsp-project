@@ -24,7 +24,7 @@
 <jsp:include page="/header.jsp"></jsp:include>  
 <jsp:include page="/intro.jsp"></jsp:include>  
 <section class="testimonials2 cid-rbmiuAiwEp" id="testimonials2-d">
-    <div class="container">
+    <div class="container" style="background: #a72c3d; padding: 10px;color: white;">
         <table id="notification-table" class="table table-striped table-bordered" style="width:100%">
         	<thead>
             	<tr>

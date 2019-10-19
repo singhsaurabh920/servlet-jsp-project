@@ -48,21 +48,22 @@ public class SseNotificationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LOGGER.info(Thread.currentThread().getName()+" :  notification event start");
 		PrintWriter pw=response.getWriter();
 		while(isTrue) {
 			NotificationSseModal msg;
 			try {
-				
 				msg = linkedBlockingQueue.take();
+				LOGGER.info(Thread.currentThread().getName()+" : "+msg);
 				String jsonObject = gson.toJson(msg);
 				pw.println("data:"+jsonObject+"\n\n");
 				pw.flush();
-				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 		pw.close();
+		LOGGER.info(Thread.currentThread().getName()+" :  notification event stopped");
 	}
 
 	/**
