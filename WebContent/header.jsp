@@ -17,11 +17,11 @@
         </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
-            	<li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="#" >Services</a>
-                </li>
-                <li class="nav-item">
+            	 <li class="nav-item">
                     <a class="nav-link link text-white display-4" href="/secure/upload" >Upload</a>
+                </li>
+            	<li class="nav-item">
+                    <a class="nav-link link text-white display-4" href="/secure/notification" >Notifications</a>
                 </li>
              </ul>
           <c:choose>   

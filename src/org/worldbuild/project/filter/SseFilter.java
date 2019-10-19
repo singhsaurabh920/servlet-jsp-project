@@ -24,13 +24,12 @@ import org.worldbuild.project.modal.Response;
 import com.google.gson.Gson;
 
 /**
- * Servlet Filter implementation class AjaxFilter
+ * Servlet Filter implementation class SseFilter
  */
-@WebFilter(filterName = "AjaxFilter", urlPatterns = { "/ajax/*" }, initParams = {
-		@WebInitParam(name = "content-type", value = "application/json"),
-		@WebInitParam(name = "character-encoding:", value = "UTF-8") 
+@WebFilter(filterName = "SseFilter", urlPatterns = { "/sse/*" }, initParams = {
+		@WebInitParam(name = "content-type", value = "text/event-stream") 
 })
-public class AjaxFilter implements Filter {
+public class SseFilter implements Filter {
 	private static final Logger LOGGER = Logger.getLogger(AjaxFilter.class);
 	private Gson gson;
 
@@ -38,11 +37,12 @@ public class AjaxFilter implements Filter {
 
 	private ServletContext context;
 
-	/**
-	 * Default constructor.
-	 */
-	public AjaxFilter() {
-		super();
+
+    /**
+     * Default constructor. 
+     */
+    public SseFilter() {
+    	super();
 		gson = ApplicationBeanContext.getGson();
 	}
 
@@ -50,7 +50,7 @@ public class AjaxFilter implements Filter {
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
+		
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class AjaxFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		res.setContentType("application/json");
+		res.setContentType("text/event-stream");
 		res.setCharacterEncoding("UTF-8");
 		HttpSession httpSession = req.getSession(false);
 		if (httpSession == null || httpSession.getAttribute("user") == null) {
@@ -67,14 +67,15 @@ public class AjaxFilter implements Filter {
 			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			PrintWriter pw = response.getWriter();
 			String jsonObject = gson.toJson(new Response<String>(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized access request"));
-			pw.print(jsonObject);
+			pw.print("data:"+jsonObject+"\n\n");
 			pw.flush();
 			pw.close();
 		} else {
+			chain.doFilter(req, res);
 			if(res.getStatus()==HttpServletResponse.SC_NOT_FOUND) {
 				PrintWriter pw=res.getWriter();
 				String jsonObject = gson.toJson(new Response<String>(HttpServletResponse.SC_NOT_FOUND,"Requested source not found"));
-				pw.print(jsonObject);
+				pw.print("data:"+jsonObject+"\n\n");
 				pw.flush();
 				pw.close();
 			}
@@ -92,7 +93,7 @@ public class AjaxFilter implements Filter {
 		while (fCxt.hasMoreElements()) {
 			String name = (String) fCxt.nextElement();
 			LOGGER.info(fConfig.getFilterName() + " Filter Context[ " + name + " ]:" + fConfig.getInitParameter(name));
-		}
+		}	
 	}
 
 }

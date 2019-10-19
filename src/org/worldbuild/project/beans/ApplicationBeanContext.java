@@ -1,11 +1,15 @@
 package org.worldbuild.project.beans;
 
 import java.util.Properties;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ScheduledExecutorService;
 
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 
 import org.worldbuild.project.constant.Email;
+import org.worldbuild.project.modal.NotificationSseModal;
 import org.worldbuild.project.service.EmailService;
 import org.worldbuild.project.service.EmailServiceImpl;
 
@@ -17,8 +21,13 @@ public class ApplicationBeanContext {
 	public static Gson gson;
 	public static Session session ;
 	public static EmailService emailService;
+	public static LinkedBlockingQueue<NotificationSseModal> blockingQueue;
+	public static ScheduledExecutorService scheduledExecutorService;
+
 	static {
 		gson= new GsonBuilder().create();
+		blockingQueue= new LinkedBlockingQueue<>();
+		scheduledExecutorService= Executors.newScheduledThreadPool(8);
 		Properties prop = System.getProperties();
 		prop.put("mail.smtp.host", Email.SMTP_SERVER); // optional, defined in SMTPTransport
 		prop.put("mail.smtp.auth", "true");
@@ -52,5 +61,15 @@ public class ApplicationBeanContext {
 	public static EmailService getEmailService() {
 		return emailService;
 	}
+
+	public static LinkedBlockingQueue<NotificationSseModal> getBlockingQueue() {
+		return blockingQueue;
+	}
+
+	public static ScheduledExecutorService getScheduledExecutorService() {
+		return scheduledExecutorService;
+	}
+
+	
 
 }
