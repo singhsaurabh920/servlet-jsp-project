@@ -51,10 +51,12 @@ public class SseNotificationServlet extends HttpServlet {
 		LOGGER.info(Thread.currentThread().getName()+" :  notification event start");
 		PrintWriter pw=response.getWriter();
 		while(isTrue) {
-			NotificationSseModal msg;
 			try {
-				msg = linkedBlockingQueue.take();
-				LOGGER.info(Thread.currentThread().getName()+" : "+msg);
+				if(pw.checkError()) {
+					break;
+				}
+				NotificationSseModal msg = linkedBlockingQueue.take();
+				//LOGGER.info(Thread.currentThread().getName()+" : "+msg);
 				String jsonObject = gson.toJson(msg);
 				pw.println("data:"+jsonObject+"\n\n");
 				pw.flush();
